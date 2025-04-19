@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from 'react';
-import Navbar from '../components/Navbar';
-import TaskForm from './components/TaskForm';
-import TaskList from '../components/TaskList';
+import Navbar from '../../../components/Navbar';
+import TaskForm from '../../../components/TaskForm';
+import TaskList from '../../../components/TaskList';
 
 export default function Dashboard() {
   // Mock data for now - will be replaced with API calls later

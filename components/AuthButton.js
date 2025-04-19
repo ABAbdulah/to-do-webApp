@@ -1,9 +1,16 @@
-    "use client";
+"use client";
+
+import { signIn } from "next-auth/react";
 
 export default function AuthButtons({ mode = "signin" }) {
+  const handleGoogleLogin = () => {
+    signIn("google", { callbackUrl: "/dashboard" }); 
+  };
+
   return (
     <div className="space-y-4 mt-4">
       <button 
+        onClick={handleGoogleLogin}
         className="w-full flex items-center justify-center gap-2 bg-white hover:bg-gray-100 text-gray-800 font-medium py-2 px-4 border border-gray-300 rounded-lg shadow-sm transition-colors"
       >
         <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -23,3 +30,4 @@ export default function AuthButtons({ mode = "signin" }) {
     </div>
   );
 }
+//           <p className="mt-4 text-sm text-gray-500">
