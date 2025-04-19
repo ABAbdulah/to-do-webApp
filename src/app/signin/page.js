@@ -9,11 +9,39 @@ export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Will implement actual authentication later
-    console.log('Sign in attempt with:', { email, password });
+  
+    const passwordRegex = /^(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+  
+    if (!passwordRegex.test(password)) {
+      alert("Password must be at least 8 characters and include a special character.");
+      return;
+    }
+  
+    // Call API to register/login user
+    try {
+      const res = await fetch("/api/auth/email-signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+      });
+  
+      const data = await res.json();
+      if (res.ok) {
+        // Redirect to dashboard
+        window.location.href = "/dashboard";
+      } else {
+        alert(data.message || "Login failed");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("An error occurred");
+    }
   };
+  
 
   return (
     <main className="min-h-screen bg-gray-50">
